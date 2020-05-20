@@ -63,6 +63,10 @@ impl AssetBuilder {
         self.asset_type = asset_type;
     }
 
+    pub fn withFile(mut self, file: File) {
+
+    }
+
     fn finish(&self) -> Asset {
         let mut encoder = GzEncoder::new(Vec::new(), self.compression);
 
@@ -76,14 +80,16 @@ impl AssetBuilder {
 }
 
 impl AssetDatabaseBuilder {
-    pub fn new(AssetBuilder &asset_builder) -> AssetDatabaseBuilder {
+    pub fn new(asset_builder : AssetBuilder) -> AssetDatabaseBuilder {
         AssetDatabaseBuilder {
             asset_builder : asset_builder,
             assets : Vec::new()
         }
     }
 
+
+
     fn finish(&self) -> Asset {
-        
+
     }
 }
