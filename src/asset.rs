@@ -65,8 +65,9 @@ impl AssetBuilder {
         self.asset_type = asset_type;
     }
 
-    pub fn withFile(mut self, file: File) {
-
+    pub fn withFile(mut self, path: &String) {
+        self.uncompressed_blob = std::fs::read(path).unwrap();
+        self.asset_type = AssetType::_ILLEGAL; // Asset type needs to be determined based on extension
     }
 
     fn finish(&self) -> Asset {
