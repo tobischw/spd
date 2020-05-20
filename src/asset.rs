@@ -19,7 +19,7 @@ pub struct Asset {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct AssetDatabase {
-    assets: BTreeMap<String, Asset>
+    pub assets: BTreeMap<String, Asset>
 }
 
 pub struct AssetBuilder {
