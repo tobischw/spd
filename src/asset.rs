@@ -87,9 +87,7 @@ impl AssetDatabaseBuilder {
         }
     }
 
-
-
-    fn finish(&self) -> Asset {
-
-    }
+    //fn finish(&self) -> Asset {
+        
+    //}
 }

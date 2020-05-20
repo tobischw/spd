@@ -1,5 +1,6 @@
 use super::asset::{Asset, AssetBuilder, AssetDatabase};
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 // ################################################
 
@@ -46,7 +47,9 @@ impl Document {
     pub fn new() -> Document {
         Document {
             head: Head::new(),
-            assets: BTreeMap::new(),
+            database: AssetDatabase {
+                assets: BTreeMap::new()
+            },
         }
     }
 }
