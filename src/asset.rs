@@ -6,6 +6,8 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 use std::io::BufWriter;
+use std::io::Cursor;
+use std::io::Read;
 use std::io::{self, Result};
 use std::collections::BTreeMap;
 
@@ -31,7 +33,7 @@ pub struct AssetDatabaseBuilder {
     assets: Vec<Asset>
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Copy, Clone)]
 pub enum AssetType {
     Content,
     Style,
@@ -69,8 +71,9 @@ impl AssetBuilder {
 
     fn finish(&self) -> Asset {
         let mut encoder = GzEncoder::new(Vec::new(), self.compression);
+        let mut file = Cursor::new(&self.uncompressed_blob);
 
-        io::copy(&mut self.uncompressed_blob, &mut encoder).unwrap();
+        io::copy(&mut file, &mut encoder).unwrap();
 
         return Asset {
             asset_type: self.asset_type, 
