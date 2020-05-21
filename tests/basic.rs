@@ -1,5 +1,7 @@
 extern crate spd;
 
+use flate2::Compression;
+
 #[test]
 fn create_doc() {
     let doc = spd::Document::new();
@@ -21,3 +23,12 @@ fn read_file(){
 
 
 
+fn test_asset_builder() {
+    let adb = spd::AssetDatabaseBuilder::new(Compression::best());
+
+    let testDatabase = adb
+        .addFile(String::from("./index.html"))
+        .finish();
+
+    
+}

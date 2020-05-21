@@ -1,4 +1,4 @@
-use super::asset::{Asset, AssetBuilder, AssetDatabase};
+use super::asset::{Asset,  AssetDatabase};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 

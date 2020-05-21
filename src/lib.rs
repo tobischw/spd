@@ -5,3 +5,4 @@ mod fileio;
 pub use asset::Asset;
 pub use document::Document;
 pub use fileio::FileIO;
+pub use asset::AssetDatabaseBuilder;
