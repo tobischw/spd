@@ -1,4 +1,5 @@
 use flate2::write::GzEncoder;
+use flate2::write::DeflateEncoder;
 use flate2::Compression;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -56,7 +57,7 @@ impl AssetDatabaseBuilder {
     }
 
     pub fn add_blob(mut self, file_identifier: String, blob: Vec<u8>, asset_type: AssetType) -> AssetDatabaseBuilder {
-        let mut encoder = GzEncoder::new(Vec::new(), self.compression);
+        let mut encoder = DeflateEncoder::new(Vec::new(), self.compression);
         let mut buff = Cursor::new(blob);
 
         io::copy(&mut buff, &mut encoder).unwrap();
