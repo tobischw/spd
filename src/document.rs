@@ -2,13 +2,11 @@ use super::asset::{Asset, AssetDatabase};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-
 pub const MAGIC: [u8; 3] = [0x53, 0x50, 0x44];
 
-pub const MAJ_VERSION: u32 = 0;
+pub const MAJ_VERSION: u8 = 0;
 
-pub const MIN_VERSION: u32 = 0x01;
-
+pub const MIN_VERSION: u8 = 0x01;
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Document {
@@ -25,8 +23,8 @@ pub enum Encryption {
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Head {
     pub magic: [u8; 3],
-    pub maj_version: u32,
-    pub min_version: u32,
+    pub maj_version: u8,
+    pub min_version: u8,
     pub encryption: Encryption,
     pub meta: Meta,
 }
