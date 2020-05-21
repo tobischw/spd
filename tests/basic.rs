@@ -1,5 +1,7 @@
 extern crate spd;
 
+use flate2::Compression;
+
 #[test]
 fn create_doc() {
     let doc = spd::Document::new();
@@ -7,6 +9,13 @@ fn create_doc() {
     assert_eq!(doc.head.min_version, 0x01)
 }
 
-fn create_doc_with_asset() {
+#[test]
+fn test_asset_builder() {
+    let adb = spd::AssetDatabaseBuilder::new(Compression::best());
+
+    let testDatabase = adb
+        .addFile(String::from("./index.html"))
+        .finish();
+
     
 }
