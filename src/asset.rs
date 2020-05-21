@@ -55,25 +55,25 @@ impl AssetDatabaseBuilder {
         }
     }
 
-    pub fn addBlob(mut self, blob: Vec<u8>, asset_type: AssetType) -> AssetDatabaseBuilder {
+    pub fn add_blob(mut self, file_identifier: String, blob: Vec<u8>, asset_type: AssetType) -> AssetDatabaseBuilder {
         let mut encoder = GzEncoder::new(Vec::new(), self.compression);
         let mut buff = Cursor::new(blob);
 
         io::copy(&mut buff, &mut encoder).unwrap();
 
         let result = encoder.finish().unwrap();
+
         let asset = Asset {
             asset_type: asset_type,
             compressed_blob: result,
         };
 
-        self.assets.insert(String::from("_file_identifier_"), asset);
-
+        self.assets.insert(file_identifier, asset);
         self
     }
 
-    pub fn addFile(mut self, path: String) -> AssetDatabaseBuilder {
-        Self::addBlob(self, std::fs::read(path).unwrap(), AssetType::_ILLEGAL)
+    pub fn add_file(mut self, file_identifier: String, path: String) -> AssetDatabaseBuilder {
+        Self::add_blob(self, file_identifier, std::fs::read(path).unwrap(), AssetType::_ILLEGAL)
     }
 
     pub fn finish(self) -> AssetDatabase {

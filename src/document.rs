@@ -1,8 +1,7 @@
-use super::asset::{Asset,  AssetDatabase};
+use super::asset::{Asset, AssetDatabase};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-// ################################################
 
 pub const MAGIC: [u8; 3] = [0x53, 0x50, 0x44];
 
@@ -10,7 +9,6 @@ pub const MAJ_VERSION: u32 = 0;
 
 pub const MIN_VERSION: u32 = 0x01;
 
-// ################################################
 
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Document {
@@ -51,6 +49,10 @@ impl Document {
                 assets: BTreeMap::new()
             },
         }
+    }
+
+    pub fn with_assets(&mut self, adb : AssetDatabase) {
+       self.database = adb; 
     }
 }
 
